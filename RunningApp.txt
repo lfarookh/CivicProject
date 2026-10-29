@@ -1,0 +1,37 @@
+develop an application for social networking for people, organization, government institues and government agencies. It should be an react native mobile app, compatible with android, ios and web browser. backend should be java program. database should be mariadb. application should have login page, then home page and netowrk feeds.
+
+Application to be deployed to AWS services.
+
+Ran 4 commands, read a file
+I’ve finished the backend and the mobile app. Next I’m adding the AWS deployment files and a README, then I’ll zip the project for you.
+
+Ran a command, shared files
+I’ve built CivicNet as a zip, civic-network.zip, with a Java backend, a React Native app for Android, iOS and web, and AWS deployment files. I haven’t compiled or run any of it. The environment had no Java compiler or Maven, so the backend is untested. Expect to fix small issues on the first build.
+
+What it does
+
+Login and sign-up: Users create an account as a person, organization, government institute or government agency. Sign-in is by email and password, using JWT tokens.
+Home page and network feed: Users post updates, like posts, and filter the feed by account type. The feed loads more posts as you scroll and refreshes when you pull down.
+Verified badge: New accounts start unverified. Someone must set verified = 1 in the users table after checking an organization’s or agency’s credentials. There is no admin screen for this yet.
+Folders in the zip
+
+backend/ is Spring Boot 3 on Java 17, with MariaDB and a docker-compose.yml for local use.
+mobile/ is an Expo (React Native) app that runs on Android, iOS and the web from one codebase.
+infra/deploy-aws.sh and the README.md cover deployment to AWS. The README lays out the AWS setup and what to harden before going live. The script has not been run either.
+To run locally
+
+In backend/, run docker compose up --build. The API comes up on port 8080.
+In mobile/, run npm install, then npm run web, npm run android or npm run ios.
+For the Android emulator, set EXPO_PUBLIC_API_URL=http://10.0.2.2:8080.
+AWS setup
+
+Database: Amazon RDS for MariaDB in private subnets, with the database password and JWT secret kept in Secrets Manager.
+API: The backend Docker image goes to ECR and runs on App Runner or ECS Fargate.
+Web app: The built web files go to S3 and are served through CloudFront.
+Phone apps: Android and iOS builds go through Expo’s EAS Build.
+Before going live
+
+Switch the database setting from update to validate and add Flyway migrations.
+Add rate limiting on the login endpoints, email verification and password reset.
+Add content moderation and reporting.
+Decide whether you want me to add comments, following, profiles or image uploads to S3 next.

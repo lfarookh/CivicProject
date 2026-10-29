@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "CivicNet",
+    "slug": "civicnet",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.civicnet.app" },
+    "android": { "package": "com.civicnet.app" },
+    "web": { "bundler": "metro", "output": "single" }
+  }
+}

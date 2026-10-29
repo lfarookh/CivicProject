@@ -1,0 +1,10 @@
+services:
+  db:
+    image: mariadb:11
+    environment: { MARIADB_DATABASE: civicnet, MARIADB_USER: civicnet, MARIADB_PASSWORD: civicnet, MARIADB_ROOT_PASSWORD: root }
+    ports: ["3306:3306"]
+  api:
+    build: .
+    environment: { DB_URL: "jdbc:mariadb://db:3306/civicnet", JWT_SECRET: "local-dev-secret-local-dev-secret-32bytes" }
+    ports: ["8080:8080"]
+    depends_on: [db]
